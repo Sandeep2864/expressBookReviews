@@ -53,15 +53,15 @@ regd_users.post("/login", (req,res) => {
 
 
 // Add a book review
-regd_users.put("/auth/review/:isbn", (req, res) => {
+regd_users.put("/auth/reviews/:isbn", (req, res) => {
 
     const isbn=req.params.isbn;
     const username=req.session.authorization.username;
-    const review=req.query.reviews;
+    const reviews=req.query.reviews;
 
     //if username was not there
-    if(!review) {
-     return res.status(404).json({message:"review can't be empty"});
+    if(!reviews) {
+     return res.statusus(404).json({message:"review can't be empty"});
     }
 
     if(!books[isbn]) {
@@ -72,9 +72,9 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
        books[isbn].reviews={};
     }
 
-    books[isbn].reviews[username]=review;
+    books[isbn].reviews[username]=reviews;
 
-   return res.status(200).json({message:"Review added/updated successfully!",reviews:books[isbn].review});
+   return res.status(200).json({message:"Review added/updated successfully!",reviews:books[isbn].reviews});
 });
 
 module.exports.authenticated = regd_users;
